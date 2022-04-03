@@ -9,10 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector("date").textContent = Math.floor(Math.floor((new Date() - yourDate) / 1000) / 60 / 60 / 24) + " DAYS";
 
     function olock() {
-        var today = new Date();
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
- 
-        document.getElementById("hvn").innerHTML = time;
+        var today = new Date(),
+            hrs = (Math.floor(Math.floor((today - yourDate) / 1000) / 60 / 60)) % 24,
+            min = (Math.floor(Math.floor((today - yourDate) / 1000) / 60)) % 60,
+            sec = Math.floor((today - yourDate) / 1000) % 60;
+        rootTime.textContent = `${(hrs>9)?hrs:"0"+hrs}:${(min>9)?min:"0"+min}:${(sec>9)?sec:"0"+sec}`;
     }
     olock();
     var timer = setInterval(function() { olock() }, 1000);
